@@ -10,15 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class RestaurantsActivity extends AppCompatActivity {
 
     String chosenCuisine="";
-    String[] restArrayChinese= {"Chinese1","Chinese2","Chinese3","Chinese4"};
-    String[] restArrayRussian= {"Russian1","Russian2","Russian3","Russian4"};
-    String[] restArrayItalian= {"Italian1","Italian2","Italian3","Italian4"};
-    String[] restArrayJapanese= {"Japanese1","Japanese2","Japanese3","Japanese4"};
-
-    String[] chosenCuisineArray;
+    List<String> chosenCuisineArray= new ArrayList<String>();
+    List<String> chosenlocationsArray= new ArrayList<String>();
     ListView restaurantListView;
     ArrayAdapter restaurantAdapter;
 
@@ -31,21 +31,25 @@ public class RestaurantsActivity extends AppCompatActivity {
         chosenCuisine=getIntent().getStringExtra("cuisine");
         switch (chosenCuisine){
             case "Russian":
-                chosenCuisineArray=restArrayRussian;
+                chosenCuisineArray= Arrays.asList(getResources().getStringArray(R.array.RussianNames));
+                chosenlocationsArray= Arrays.asList(getResources().getStringArray(R.array.RussianLocation));
                 break;
             case "Chinese":
-                chosenCuisineArray=restArrayChinese;
+                chosenCuisineArray=Arrays.asList(getResources().getStringArray(R.array.ChineseNames));
+                chosenlocationsArray=Arrays.asList(getResources().getStringArray(R.array.ChineseLocation));
                 break;
             case "Italian":
-                chosenCuisineArray=restArrayItalian;
+                chosenCuisineArray=Arrays.asList(getResources().getStringArray(R.array.ItalianNames));
+                chosenlocationsArray=Arrays.asList(getResources().getStringArray(R.array.ItalianLocation));
                 break;
             case "Japanese":
-                chosenCuisineArray=restArrayJapanese;
+                chosenCuisineArray=Arrays.asList(getResources().getStringArray(R.array.JapaneseNames));
+                chosenlocationsArray=Arrays.asList(getResources().getStringArray(R.array.JapaneseLocation));
                 break;
 
 
         }
-        Log.i("CUS",chosenCuisineArray[0].toString());
+
 
         ((TextView)findViewById(R.id.txtSelectedCuisine)).setText("Chosen Cuisine: "+ chosenCuisine);
 
@@ -62,8 +66,13 @@ public class RestaurantsActivity extends AppCompatActivity {
                                     int position, long id) {
                 Intent intent;
                 String selectedSetting = (String) restaurantListView.getItemAtPosition(position);
+
                 intent = new Intent(RestaurantsActivity.this, MapsActivity.class);
-                intent.putExtra("re", selectedSetting);
+                String temp1 = (String)chosenlocationsArray.get(position);
+                String[] coordinates = temp1.split(",");
+                intent.putExtra("Lat", Double.parseDouble(coordinates[0]));
+                intent.putExtra("Lng", Double.parseDouble(coordinates[1]));
+                intent.putExtra("Rst", selectedSetting);
                 startActivity(intent);
             }
         });
