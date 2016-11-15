@@ -1,4 +1,57 @@
 <resources>
     <string name="app_name">Lab5</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="RussianNames">
+        <item>Red Square Restaurant and Banquet Hall</item>
+        <item>Crepes Сlub</item>
+        <item>Pravda Vodka</item>
+        <item>Vera's Kitchen</item>
+    </string-array>
+    <string-array name="RussianLocation">
+        <item>43.7673371,-79.4719781</item>
+        <item>43.6558247,-79.3960703</item>
+        <item>43.6485716,-79.3768552</item>
+        <item>43.7075707,-79.397928</item>
+    </string-array>
+
+    <string-array name="JapaneseNames">
+        <item>Nami+Japanese+Restaurant</item>
+        <item>KINKA+IZAKAYA+ORIGINAL</item>
+        <item>Miku+Toronto</item>
+        <item>Japango</item>
+    </string-array>
+    <string-array name="JapaneseLocation">
+        <item>43.6508653,-79.3780594</item>
+        <item>43.6604231,-79.3813913</item>
+        <item>43.6411862,-79.3796821</item>
+        <item>43.6550699,-79.3874857</item>
+    </string-array>
+
+    <string-array name="ItalianNames">
+        <item>Carisma Restaurant</item>
+        <item>Hot House Restaurant</item>
+        <item>Terroni</item>
+        <item>Mirto Italian Restaurant</item>
+    </string-array>
+    <string-array name="ItalianLocation">
+        <item>43.6494687,-79.3753207</item>
+        <item>43.648875,-79.3736742</item>
+        <item>43.6489054,-79.3736742</item>
+        <item>43.6507069,-79.3782665</item>
+    </string-array>
+
+    <string-array name="ChineseNames">
+        <item>Lee+Garden+Restaurant</item>
+        <item>Asian+Legend</item>
+        <item>Lai+Wah+Heen</item>
+        <item>Yueh+Tung+Restaurant</item>
+    </string-array>
+    <string-array name="ChineseLocation">
+        <item>43.6546963,-79.400471</item>
+        <item>43.6523821,-79.3975207</item>
+        <item>43.6547179,-79.3883577</item>
+        <item>43.6552887,-79.387466</item>
+    </string-array>
+
 </resources>

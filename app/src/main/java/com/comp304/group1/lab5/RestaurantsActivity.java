@@ -61,9 +61,9 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent;
-                //String selectedSetting = (String) restaurantListView.getItemAtPosition(position);
+                String selectedSetting = (String) restaurantListView.getItemAtPosition(position);
                 intent = new Intent(RestaurantsActivity.this, MapsActivity.class);
-                //intent.putExtra("cuisine", selectedSetting);
+                intent.putExtra("re", selectedSetting);
                 startActivity(intent);
             }
         });
