@@ -23,9 +23,8 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtSelectedCuisine"
-        android:layout_toEndOf="@+id/txtSelectedCuisine"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="65dp"
         android:id="@+id/lvRestaurant"
+        android:layout_below="@+id/txtSelectedCuisine"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

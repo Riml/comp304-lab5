@@ -1,7 +1,11 @@
 package com.comp304.group1.lab5;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,18 +33,40 @@ public class RestaurantsActivity extends AppCompatActivity {
             case "Russian":
                 chosenCuisineArray=restArrayRussian;
                 break;
+            case "Chinese":
+                chosenCuisineArray=restArrayChinese;
+                break;
+            case "Italian":
+                chosenCuisineArray=restArrayItalian;
+                break;
+            case "Japanese":
+                chosenCuisineArray=restArrayJapanese;
+                break;
 
 
         }
+        Log.i("CUS",chosenCuisineArray[0].toString());
 
         ((TextView)findViewById(R.id.txtSelectedCuisine)).setText("Chosen Cuisine: "+ chosenCuisine);
 
-        restaurantListView = (ListView) findViewById(R.id.cuisineView);
+        restaurantListView = (ListView) findViewById(R.id.lvRestaurant);
 
         restaurantAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, chosenCuisineArray);
 
-        // Attach the array adapter to the spinner
         restaurantListView.setAdapter(restaurantAdapter);
+
+
+        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent;
+                //String selectedSetting = (String) restaurantListView.getItemAtPosition(position);
+                intent = new Intent(RestaurantsActivity.this, MapsActivity.class);
+                //intent.putExtra("cuisine", selectedSetting);
+                startActivity(intent);
+            }
+        });
 
     }
 }
