@@ -1,6 +1,9 @@
 package com.comp304.group1.lab5;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class RestaurantsActivity extends AppCompatActivity {
 
@@ -21,12 +26,15 @@ public class RestaurantsActivity extends AppCompatActivity {
     List<String> chosenlocationsArray= new ArrayList<String>();
     ListView restaurantListView;
     ArrayAdapter restaurantAdapter;
+    List<Address> geoCodes;
+    Context thisContext;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
+        thisContext = this;
 
         chosenCuisine=getIntent().getStringExtra("cuisine");
         switch (chosenCuisine){
@@ -70,8 +78,16 @@ public class RestaurantsActivity extends AppCompatActivity {
                 intent = new Intent(RestaurantsActivity.this, MapsActivity.class);
                 String temp1 = (String)chosenlocationsArray.get(position);
                 String[] coordinates = temp1.split(",");
-                intent.putExtra("Lat", Double.parseDouble(coordinates[0]));
-                intent.putExtra("Lng", Double.parseDouble(coordinates[1]));
+
+                try {
+                    geoCodes = new Geocoder(thisContext, Locale.getDefault()).getFromLocationName(selectedSetting, 1);
+                    intent.putExtra("Lat", geoCodes.get(0).getLatitude());
+                    intent.putExtra("Lng", geoCodes.get(0).getLongitude());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 intent.putExtra("Rst", selectedSetting);
                 startActivity(intent);
             }
