@@ -74,6 +74,7 @@ public class RestaurantsActivity extends AppCompatActivity {
                                     int position, long id) {
                 Intent intent;
                 String selectedSetting = (String) restaurantListView.getItemAtPosition(position);
+                selectedSetting+=" ,Toronto, ON";
 
                 intent = new Intent(RestaurantsActivity.this, MapsActivity.class);
                 String temp1 = (String)chosenlocationsArray.get(position);
@@ -81,8 +82,16 @@ public class RestaurantsActivity extends AppCompatActivity {
 
                 try {
                     geoCodes = new Geocoder(thisContext, Locale.getDefault()).getFromLocationName(selectedSetting, 1);
-                    intent.putExtra("Lat", geoCodes.get(0).getLatitude());
-                    intent.putExtra("Lng", geoCodes.get(0).getLongitude());
+
+                    if(geoCodes.isEmpty()){
+                        intent.putExtra("Lat", Double.parseDouble(coordinates[0]));
+                        intent.putExtra("Lng", Double.parseDouble(coordinates[1]));
+
+                    }
+                    else {
+                        intent.putExtra("Lat", geoCodes.get(0).getLatitude());
+                        intent.putExtra("Lng", geoCodes.get(0).getLongitude());
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
